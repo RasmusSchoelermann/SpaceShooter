@@ -4,6 +4,9 @@ using UnityEngine;
 
 public class Enemy : Entity
 {
+
+    public int score = 10;
+
     public enum MovementAction { straight, sideways}
 
     public MovementAction movementAction = MovementAction.straight;
@@ -11,18 +14,33 @@ public class Enemy : Entity
     public float speedX, speedY;
 
     public float targetYPosition;
-    public float xScreenWidth;
+
+    public Vector2 screenborder;
 
     private float shipWidth;
+    private float shipHeight;
 
     private bool moveright = true;
+    private bool movingoffMap = false;
+
+    private float timeuntilFlyingoff = 40f;
+    private float currentTime;
+
 
     private void Start()
     {
-        Vector2 screenborder = Camera.main.ScreenToWorldPoint(new Vector3(Screen.width, Screen.height, 5));
-        xScreenWidth = screenborder.x;
+        screenborder = Camera.main.ScreenToWorldPoint(new Vector3(Screen.width, Screen.height, 5));
+
 
         shipWidth = rb.transform.GetComponentInChildren<SpriteRenderer>().bounds.size.x / 2;
+        shipHeight = rb.transform.GetComponentInChildren<SpriteRenderer>().bounds.size.y / 2;
+
+        targetYPosition = Random.Range(screenborder.y / 2, screenborder.y - shipHeight);
+    }
+
+    private void Update()
+    {
+        currentTime += Time.deltaTime;
     }
 
 
@@ -44,28 +62,50 @@ public class Enemy : Entity
             {
                 movementAction = MovementAction.sideways;
             }
+
+            //Cleanup
+
+            if(transform.position.y <= -screenborder.y -shipHeight && movingoffMap == true)
+            {
+                Destroy(gameObject);
+            }
         }
         else if (movementAction == MovementAction.sideways)
         {
             if (moveright)
             {
                 rb.velocity = new Vector2(speedX, 0);
-                if(transform.position.x > xScreenWidth - shipWidth)
+                if(transform.position.x > screenborder.x - shipWidth)
                 {
                     moveright = false;
-                    Debug.Log(moveright);
                 }
             }
             else
             {
                 rb.velocity = new Vector2(-speedX, 0);
-                if(transform.position.x < -xScreenWidth + shipWidth)
+                if(transform.position.x < -screenborder.x + shipWidth)
                 {
                     moveright = true;
-                    Debug.Log(moveright);
                 }
             }
+
+            CheckForTimer();
         }
+    }
+
+    private void CheckForTimer()
+    {
+        if(currentTime >= timeuntilFlyingoff)
+        {
+            targetYPosition = -screenborder.y - shipHeight;
+            movementAction = MovementAction.straight;
+            movingoffMap = true;
+        }
+    }
+
+    private void OnDestroy()
+    {
+        GameObject.FindGameObjectWithTag("GameLoop").GetComponent<GameLoop>().AddScore(score);
     }
 
 }

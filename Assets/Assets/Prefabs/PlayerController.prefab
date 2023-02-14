@@ -147,7 +147,7 @@ MonoBehaviour:
   Bulletspawns:
   - {fileID: 3600436190912407280}
   - {fileID: 3524600015864428247}
-  fireRate: 0.8
+  fireRate: 1
   laser: {fileID: 4554826745539159779, guid: 51d0400bacaadb649809b91771eec22b, type: 3}
 --- !u!1 &2572662774002375451
 GameObject:

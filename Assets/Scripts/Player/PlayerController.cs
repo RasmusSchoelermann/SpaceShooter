@@ -13,6 +13,9 @@ public class PlayerController : Entity
     private float shipWidth;
     private float shipHeight;
 
+    public bool powerUP;
+    public float powerUPTime = 0f;
+
     private void Start()
     {
         screenBounds = _cam.ScreenToWorldPoint(new Vector3(Screen.width, Screen.height, 5));
@@ -30,6 +33,21 @@ public class PlayerController : Entity
 
         
 
+    }
+
+    private void Update()
+    {
+        if(powerUP)
+        {
+            Weapon weapon = gameObject.GetComponent<Weapon>();
+            powerUPTime -= Time.deltaTime;
+            weapon.fireRate = 0.5f;
+            if(powerUPTime <= 0 ) 
+            {
+                powerUP = false;
+                weapon.fireRate = 1f;
+            }
+        }
     }
 
     private void HandleMovementInput()

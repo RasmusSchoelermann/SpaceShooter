@@ -52,11 +52,12 @@ MonoBehaviour:
   Health: 20
   mS: 1
   rb: {fileID: 8911210305581014819}
+  score: 10
   movementAction: 0
-  speedX: 3
-  speedY: 2
+  speedX: 5
+  speedY: 8
   targetYPosition: 5
-  xScreenWidth: 0
+  screenborder: {x: 0, y: 0}
 --- !u!114 &6016945328811567228
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -71,7 +72,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Bulletspawns:
   - {fileID: 5442425893692685297}
-  fireRate: 3
+  fireRate: 1.5
   laser: {fileID: 4554826745539159779, guid: 975b6c63bdc21a141bc84c80034d6c62, type: 3}
 --- !u!50 &8911210305581014819
 Rigidbody2D:

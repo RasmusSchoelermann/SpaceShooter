@@ -19,7 +19,7 @@ public class Laser : MonoBehaviour
             rb.AddRelativeForce(new Vector2(0, -speed), ForceMode2D.Impulse);
         }
 
-        Destroy(gameObject, 10f);
+        Destroy(gameObject, 4f);
     }
 
     private void OnTriggerEnter2D(Collider2D other)
