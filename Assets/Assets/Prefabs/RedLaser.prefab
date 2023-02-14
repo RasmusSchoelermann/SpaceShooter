@@ -12,9 +12,9 @@ GameObject:
   - component: {fileID: 6826921785809110165}
   - component: {fileID: 4554826745539159779}
   - component: {fileID: 5823128279271323056}
-  - component: {fileID: 2076651481413952538}
+  - component: {fileID: 7275799938683691628}
   m_Layer: 0
-  m_Name: Laser
+  m_Name: RedLaser
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -76,7 +76,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 1
-  m_Sprite: {fileID: 21300000, guid: c5e971416367ca547b82f0c8173d922f, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 0f069e0a5017fa140b8b5c4ed07d5397, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -123,7 +123,7 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
---- !u!70 &2076651481413952538
+--- !u!70 &7275799938683691628
 CapsuleCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}

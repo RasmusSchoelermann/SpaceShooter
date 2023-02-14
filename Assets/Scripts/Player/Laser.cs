@@ -24,7 +24,7 @@ public class Laser : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D other)
     {
-        if(other.CompareTag("Enemy"))
+        if(other.CompareTag("Enemy") && transform.parent.tag != "Enemy")
         {
             Enemy enemy = other.GetComponent<Enemy>();
             enemy.TakeDamage(damage);
@@ -32,9 +32,9 @@ public class Laser : MonoBehaviour
             Destroy(gameObject);
             
         }
-        else if(other.CompareTag("Player"))
+        else if(other.CompareTag("Player") && transform.parent.tag != "Player")
         {
-            PlayerController player = other.GetComponent<PlayerController>();
+            PlayerController player = other.GetComponentInParent<PlayerController>();
             player.TakeDamage(damage);
 
             Destroy(gameObject);
