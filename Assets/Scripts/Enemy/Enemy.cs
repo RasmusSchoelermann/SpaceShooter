@@ -26,4 +26,5 @@ public class Enemy : Entity
             rb.velocity = new Vector2(Mathf.Sin(Time.time*speedO) * speedX, -speedX);
         }
     }
+
 }

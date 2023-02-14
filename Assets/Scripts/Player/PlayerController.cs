@@ -25,10 +25,28 @@ public class PlayerController : Entity
     private void FixedUpdate()
     {
         HandleMovementInput();
+        HandleFireInput();
+        CheckMapBorder();
+
+        
 
     }
 
-    private void LateUpdate()
+    private void HandleMovementInput()
+    {
+        rb.velocity = new Vector3(Input.GetAxis("Horizontal") * mS * Time.deltaTime, Input.GetAxis("Vertical") * mS * Time.deltaTime, 0);
+    }
+
+    private void HandleFireInput()
+    {
+        if(Input.GetKey(KeyCode.Space))
+        {
+            Weapon weapon = gameObject.GetComponent<Weapon>();
+            weapon.fireWeapon();
+        }
+    }
+
+    private void CheckMapBorder()
     {
         Vector3 viewPos = rb.transform.position;
         viewPos.x = Mathf.Clamp(viewPos.x, screenBounds.x * -1 + shipWidth, screenBounds.x - shipWidth);
@@ -37,8 +55,5 @@ public class PlayerController : Entity
         rb.transform.position = viewPos;
     }
 
-    private void HandleMovementInput()
-    {
-        rb.velocity = new Vector3(Input.GetAxis("Horizontal") * mS * Time.deltaTime, Input.GetAxis("Vertical") * mS * Time.deltaTime, 0);
-    }
+
 }
