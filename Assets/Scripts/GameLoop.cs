@@ -14,21 +14,23 @@ public class GameLoop : MonoBehaviour
     public float currentGameTime;
 
     public float nextEnemySpawn = 20f;
-
     public int powerUpCounter = 0;
 
-    public bool GamePause = false;
 
     public Camera _cam;
-
     public TextMeshProUGUI TimerTxt;
-
     public TextMeshProUGUI ScoreTxt;
 
     public int GameScore = 0;
+    public bool GamePause = false;
+
+    public bool GameOver = false;
 
     private int Delay = 1;
     private float _secondsTimer;
+
+    [SerializeField]
+    private PauseMenuHandler _pauseMenu;
 
 
     private void Start()
@@ -37,6 +39,9 @@ public class GameLoop : MonoBehaviour
 
         TimerTxt = GameObject.FindGameObjectWithTag("GameTime").GetComponent<TextMeshProUGUI>();
         ScoreTxt = GameObject.FindGameObjectWithTag("GameScore").GetComponent<TextMeshProUGUI>();
+
+        Time.timeScale = 1.0f;
+
     }
 
     private void Update()
@@ -69,7 +74,20 @@ public class GameLoop : MonoBehaviour
 
             updateTimer();
         }
-    } 
+
+        CheckGameState();
+    }
+
+    private void CheckGameState()
+    {
+        if(GameObject.FindGameObjectWithTag("Player") == null)
+        {
+            _pauseMenu.MenuState(true);
+            _pauseMenu.headerText.text = "Total Score:";
+            _pauseMenu.resumeButton.gameObject.SetActive(false);
+            GameOver = true;
+        }
+    }
 
     private void updateTimer()
     {

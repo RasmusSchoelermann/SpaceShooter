@@ -26,6 +26,8 @@ public class Enemy : Entity
     private float timeuntilFlyingoff = 40f;
     private float currentTime;
 
+    public IngameSoundManager manager;
+
 
     private void Start()
     {
@@ -103,9 +105,17 @@ public class Enemy : Entity
         }
     }
 
+    public override void PlayDestroySound()
+    {
+        manager.playAudioOnDestroy(manager.sounds[1]);
+    }
+
     private void OnDestroy()
     {
-        GameObject.FindGameObjectWithTag("GameLoop").GetComponent<GameLoop>().AddScore(score);
+        if (GameObject.FindGameObjectWithTag("GameLoop") != null)
+        {
+            GameObject.FindGameObjectWithTag("GameLoop").GetComponent<GameLoop>().AddScore(score);
+        }
     }
 
 }

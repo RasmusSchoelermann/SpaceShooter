@@ -15,8 +15,11 @@ public class Entity : MonoBehaviour
         Health -= damage;
         if (Health <= 0)
         {
+            PlayDestroySound();
             Destroy(gameObject);
         }
     }
+
+    public virtual void PlayDestroySound(){}
 
 }

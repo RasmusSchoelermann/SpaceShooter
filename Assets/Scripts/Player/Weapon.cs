@@ -17,9 +17,21 @@ public class Weapon : MonoBehaviour
 
     public void fireWeapon()
     {
+        IngameSoundManager _manager;
         if(_weaponCooldown > fireRate)
         {
             _weaponCooldown = 0;
+
+            if(gameObject.tag == "Player")
+            {
+                _manager = gameObject.GetComponent<PlayerController>().manager;
+                _manager.playAudio(_manager.sounds[0]);
+            }
+            else if(gameObject.tag == "Enemy")
+            {
+                _manager = gameObject.GetComponent<Enemy>().manager;
+                _manager.playAudio(_manager.sounds[0]);
+            }
 
             foreach (var spawnpoint in Bulletspawns)
             {

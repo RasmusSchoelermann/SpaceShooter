@@ -8,6 +8,9 @@ TagManager:
   - GameTime
   - GameScore
   - GameLoop
+  - PauseMenu
+  - BackgroundMusic
+  - OneShotAudioSource
   layers:
   - Default
   - TransparentFX
